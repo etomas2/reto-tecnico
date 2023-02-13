@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-work-${WORKSPACE}
+  namespace: ${NAMESPACE}
+  labels:
+    app: ms-work-${WORKSPACE}
+spec:
+  type: ClusterIP
+  selector:
+    app: ms-work-${WORKSPACE}
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-work-${WORKSPACE}-dp
+  namespace: ${NAMESPACE}
+  labels:
+    app: ms-work-${WORKSPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-work-${WORKSPACE}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: ms-work-${WORKSPACE}
+    spec:
+      containers:
+        - name: microservice-work
+          image: gitlab.cpsaa.com.pe:5050/cantera/proyecto-isicom/proyecto-isicom-web/isicom-backend/microservice-work/${DOCKER_SUB_LEVEL}:${VERSION}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+          - name: storage-tokens
+            mountPath: /var/tokens
+      volumes:
+      - name: storage-tokens
+        persistentVolumeClaim:
+          claimName: secrets-storage-pvc
+      imagePullSecrets:
+        - name: gitlab-isicom-registry

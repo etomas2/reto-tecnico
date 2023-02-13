@@ -1,0 +1,28 @@
+{
+  "name": "isicom-service",
+  "version": "1.0.0",
+  "description": "Multi-npm-start",
+  "author": "etomasayala@gmail.com",
+  "private": true,
+  "scripts": {
+    "Iapigateway": "cd api-gateway && npm install",
+    "Imantifraud": "cd anti-fraud-microservice && npm install",
+    "Imtransaction": "cd transaction-microservice && npm install",
+    "apigateway": "cd api-gateway && npm run start:dev",
+    "mantifraud": "cd anti-fraud-microservice && npm run start:dev",
+    "mtransaction": "cd transaction-microservice && npm run start:dev",
+    "install": "concurrently \"npm run Iapigateway\" \"npm run Imantifraud\" \"npm run Imtransaction\" ",
+    "start": "concurrently \"npm run apigateway\" \"npm run mantifraud\" \"npm run mtransaction\" "
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "concurrently": "^7.0.0",
+    "docxtemplater-image-module": "^3.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^1.2.0",
+    "eslint": "^8.32.0",
+    "webpack": "^5.73.0"
+  }
+}
