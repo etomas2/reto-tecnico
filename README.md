@@ -11,10 +11,9 @@ $ docker compose up -d
 
 
 
-El servidor se ejecuta en:<br>
-http://localhost:3000
+El servidor se ejecuta en: http://localhost:3000
 <br>
-<br>La Dcocumentación de la API se ejecuta en:
+<br>La Documentación de la API se ejecuta en:
  http://localhost:3000/apidocs
 
 
