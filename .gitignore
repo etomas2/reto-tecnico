@@ -39,5 +39,4 @@ lerna-debug.log*
 package-lock.json
 ./dist
 
-#DB FOLDER
-postgres/*
+
