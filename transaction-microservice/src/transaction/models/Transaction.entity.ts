@@ -3,7 +3,7 @@ import { TransactionType } from './TransactionType.entity';
 import {TransactionStatus} from "./TransactionStatus.entity";
 @Entity({ name: 'transaction' })
 export class Transaction extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid") //Identificador único universal
   @PrimaryColumn()
   transactionExternalId: number;
   @Column()
